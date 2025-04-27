@@ -1,5 +1,6 @@
-import { Home, Rss, LogOut } from "lucide-react";
+import { Home, Rss } from "lucide-react";
 import Link from 'next/link';
+import { SignOut } from "./login/signout-button";
 
 import {
     Sidebar,
@@ -28,13 +29,6 @@ const items = {
             icon: Rss,
         },
     ],
-    footer: [
-        {
-            title: "Log out",
-            url: "#",
-            icon: LogOut,
-        },
-    ]
 };
 
 export function AppSidebar() {
@@ -74,19 +68,11 @@ export function AppSidebar() {
 
             <SidebarFooter>
             <SidebarMenu>
-                {items.footer.map((item) => (
-                    <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton asChild>
-                        <Link
-                            key={item.title}
-                            href={item.url}
-                        >
-                            <item.icon />
-                            <span>{item.title}</span>
-                        </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                ))}
+                <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                        <SignOut />
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
             </SidebarMenu>
             </SidebarFooter>
         </Sidebar>
