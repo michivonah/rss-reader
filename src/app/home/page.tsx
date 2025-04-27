@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import NewsCard from "@/components/news-card";
 
 export default function Page(){
     return (
@@ -8,15 +8,12 @@ export default function Page(){
                     Home
                 </h1>
             </div>
-            <div>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>News title</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <p>Hello World!</p>
-                    </CardContent>
-                </Card>
+            <div className="grid grid-cols-4 gap-4">
+                <NewsCard />
+                <NewsCard />
+                <NewsCard />
+                <NewsCard />
+                <NewsCard />
             </div>
         </div>
     );
