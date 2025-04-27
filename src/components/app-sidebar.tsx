@@ -1,4 +1,5 @@
-import { Home, Rss, LogOut } from "lucide-react"
+import { Home, Rss, LogOut } from "lucide-react";
+import Link from 'next/link';
 
 import {
     Sidebar,
@@ -6,40 +7,63 @@ import {
     SidebarFooter,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
+    //SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarTrigger,
   } from "@/components/ui/sidebar";
 
-const items = [
-    {
-        title: "Home",
-        url: "/home",
-        icon: Home,
-    },
-    {
-        title: "Manage feeds",
-        url: "/home/feeds/manage",
-        icon: Rss,
-    },
-];
+const items = {
+    main: [
+        {
+            title: "Home",
+            url: "/home",
+            icon: Home,
+        },
+        {
+            title: "Manage feeds",
+            url: "/home/feeds/manage",
+            icon: Rss,
+        },
+    ],
+    footer: [
+        {
+            title: "Log out",
+            url: "#",
+            icon: LogOut,
+        },
+    ]
+};
 
 export function AppSidebar() {
     return (
-        <Sidebar collapsible="icon">            
+        <Sidebar collapsible="icon">
+            <SidebarHeader>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton asChild>
+                            <SidebarTrigger />
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarHeader>
+
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {items.map((item) => (
+                            {items.main.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link
+                                            key={item.title}
+                                            href={item.url}
+                                        >
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
@@ -49,16 +73,21 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <SidebarMenu>
-                    <SidebarMenuItem key="logoutBtn">
+            <SidebarMenu>
+                {items.footer.map((item) => (
+                    <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton asChild>
-                            <a href="#">
-                                <LogOut />
-                                <span>Log out</span>
-                            </a>
+                        <Link
+                            key={item.title}
+                            href={item.url}
+                        >
+                            <item.icon />
+                            <span>{item.title}</span>
+                        </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
-                </SidebarMenu>
+                ))}
+            </SidebarMenu>
             </SidebarFooter>
         </Sidebar>
     )
