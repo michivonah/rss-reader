@@ -1,6 +1,6 @@
 import { Home, Rss } from "lucide-react";
 import Link from 'next/link';
-import { SignOut } from "./login/signout-button";
+import UserMenu from "./sidebar/user-menu";
 
 import {
     Sidebar,
@@ -67,13 +67,7 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-            <SidebarMenu>
-                <SidebarMenuItem>
-                    <SidebarMenuButton asChild>
-                        <SignOut />
-                    </SidebarMenuButton>
-                </SidebarMenuItem>
-            </SidebarMenu>
+                <UserMenu />
             </SidebarFooter>
         </Sidebar>
     )
