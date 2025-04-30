@@ -1,0 +1,41 @@
+Table user {
+	id uuid [ pk, not null, unique ]
+	mail text [ not null, unique ]
+	active boolean [ not null, default: true ]
+}
+
+Table feed {
+	id uuid [ pk, not null, unique ]
+	name text
+	url text [ not null ]
+	public boolean [ not null, default: false ]
+}
+
+Table articles {
+	id uuid [ pk, not null, unique ]
+	title text [ not null ]
+	description text
+	site_url text [ not null ]
+	image_url text
+	publish_date timestamptz [ not null ]
+	feed_id uuid [ not null ]
+}
+
+Table user_to_feed {
+	id integer [ pk, increment, not null, unique ]
+	user_id uuid [ not null ]
+	feed_id uuid [ not null ]
+	owner boolean [ not null, default: False ]
+}
+
+Ref fk_user_to_feed_user_id_user {
+	user_to_feed.user_id > user.id [ delete: no action, update: no action ]
+}
+
+Ref fk_user_to_feed_feed_id_feed {
+	user_to_feed.feed_id > feed.id [ delete: no action, update: no action ]
+}
+
+Ref fk_articles_feed_id_feed {
+	articles.feed_id > feed.id [ delete: no action, update: no action ]
+}
